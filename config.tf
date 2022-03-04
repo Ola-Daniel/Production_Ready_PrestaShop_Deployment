@@ -1,6 +1,6 @@
 # config.tf
 provider "aws" {
-  region  = "us-east-1"
+  region  = "eu-west-2"
   profile = "tfuser"
 }
 
@@ -8,9 +8,9 @@ terraform {
   required_version = ">= 1.0"
 
   backend "s3" {
-    bucket  = "terraform"
+    bucket  = "olugbotemiterraformbucket"
     key     = "terraform.tfstate"
-    region  = "us-east-1"
+    region  = "eu-west-2"
     profile = "tfuser"
   }
 
