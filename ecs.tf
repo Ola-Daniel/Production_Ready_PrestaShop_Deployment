@@ -1,29 +1,29 @@
 # ecs.tf
 resource "aws_ecs_cluster" "app" {
   name = "app"
-  }
+}
 resource "aws_ecs_service" "prestashop" {
   name            = "prestashop"
   task_definition = aws_ecs_task_definition.prestashop.arn
   cluster         = aws_ecs_cluster.app.id
   launch_type     = "FARGATE"
-    network_configuration {
-      assign_public_ip = false
+  network_configuration {
+    assign_public_ip = false
 
-      security_groups = [
-        aws_security_group.egress_all.id,
-        aws_security_group.ingress_api.id,
-      ]
+    security_groups = [
+      aws_security_group.egress_all.id,
+      aws_security_group.ingress_api.id,
+    ]
 
-      subnets = [
-        aws_subnet.private_d.id,
-        aws_subnet.private_e.id,
-      ]
-   }
+    subnets = [
+      aws_subnet.private_d.id,
+      aws_subnet.private_e.id,
+    ]
+  }
   load_balancer {
     target_group_arn = aws_lb_target_group.prestashop.arn
-    container_name = "prestashop"
-    container_port = "3000"
+    container_name   = "prestashop"
+    container_port   = "3000"
   }
 
   desired_count = 1
@@ -62,10 +62,10 @@ resource "aws_ecs_task_definition" "prestashop" {
     }
   ]
   EOF
-  execution_role_arn = aws_iam_role.prestashop_task_execution_role.arn
+  execution_role_arn    = aws_iam_role.prestashop_task_execution_role.arn
   # These are the minimum values for Fargate containers.
-  cpu = 256
-  memory = 512
+  cpu                      = 256
+  memory                   = 512
   requires_compatibilities = ["FARGATE"]
 
   # This is required for Fargate containers (more on this later).
@@ -86,7 +86,7 @@ data "aws_iam_policy_document" "ecs_task_assume_role" {
     actions = ["sts:AssumeRole"]
 
     principals {
-      type = "Service"
+      type        = "Service"
       identifiers = ["ecs-tasks.amazonaws.com"]
     }
   }
@@ -110,10 +110,10 @@ resource "aws_lb_target_group" "prestashop" {
   target_type = "ip"
   vpc_id      = aws_vpc.app_vpc.id
 
-#  health_check {
-#   enabled = true
-#   path    = "/health"
-# }
+  #  health_check {
+  #   enabled = true
+  #   path    = "/health"
+  # }
 
   depends_on = [aws_alb.prestashop]
 }
