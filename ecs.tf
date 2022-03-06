@@ -24,7 +24,7 @@ resource "aws_ecs_service" "prestashop" {
   load_balancer {
     target_group_arn = aws_lb_target_group.prestashop.arn
     container_name   = "prestashop"
-    container_port   = "3000"
+    container_port   = "80"
   }
 
   desired_count = 1
@@ -49,7 +49,7 @@ resource "aws_ecs_task_definition" "prestashop" {
       "image": "prestashop/prestashop:latest",
       "portMappings": [
         {
-          "containerPort": 3000
+          "containerPort": 80
         }
       ],
       "logConfiguration": {
@@ -106,7 +106,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role" {
 }
 resource "aws_lb_target_group" "prestashop" {
   name        = "prestashop"
-  port        = 3000
+  port        = 80
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = aws_vpc.app_vpc.id
@@ -125,8 +125,8 @@ resource "aws_alb" "prestashop" {
   load_balancer_type = "application"
 
   subnets = [
-    aws_subnet.public_d.id,
-    aws_subnet.public_e.id,
+    aws_subnet.public_a.id,
+    aws_subnet.public_b.id,
   ]
 
   security_groups = [
