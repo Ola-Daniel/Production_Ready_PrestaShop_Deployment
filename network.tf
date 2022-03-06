@@ -156,15 +156,15 @@ resource "aws_security_group" "ingress_api" {
   }
 }
 
-resource "aws_security_group" "database" {
+resource "aws_security_group" "ingress_database" {
   name        = "database"
   description = "Allow ingress to Database"
-  vpc_id = aws_vpc.app_vpc.id
+  vpc_id      = aws_vpc.app_vpc.id
 
   ingress {
-  from_port = 3306
-  to_port   = 3306
-  protocol  = "TCP"
-  cidr_blocks = ["0.0.0.0/0"]
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
