@@ -19,8 +19,12 @@ module "db" {
   port     = 3306
 
   #multi_az               = true
-  #subnet_ids             = module.vpc.database_subnets
+  subnet_ids             = aws_subnet.private_a.id
   #vpc_security_group_ids = [module.security_group.security_group_id]
+  security_groups = [
+      aws_security_group.egress_all.id,
+      aws_security_group.database.id,
+    ]
 
   #maintenance_window              = "Mon:00:00-Mon:03:00"
   #backup_window                   = "03:00-06:00"
@@ -75,9 +79,9 @@ module "db_default" {
   engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t4g.large"
+  instance_class       = "db.t2.micro"
 
-  allocated_storage = 20
+  allocated_storage = 5
 
   db_name  = "completeMysql"
   username = "complete_mysql"

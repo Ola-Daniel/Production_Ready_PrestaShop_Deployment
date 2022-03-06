@@ -17,8 +17,8 @@ resource "aws_ecs_service" "prestashop" {
     ]
 
     subnets = [
-      aws_subnet.private_d.id,
-      aws_subnet.private_e.id,
+      aws_subnet.private_a.id,
+      aws_subnet.private_b.id,
     ]
   }
   load_balancer {
