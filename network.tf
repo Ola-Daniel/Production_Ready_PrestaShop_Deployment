@@ -3,43 +3,43 @@ resource "aws_vpc" "app_vpc" {
   cidr_block = "10.0.0.0/16"
 }
 
-resource "aws_subnet" "public_d" {
+resource "aws_subnet" "public_a" {
   vpc_id            = aws_vpc.app_vpc.id
   cidr_block        = "10.0.1.0/25"
-  availability_zone = "eu-west-2d"
+  availability_zone = "eu-west-2a"
 
   tags = {
-    "Name" = "public | eu-west-2d"
+    "Name" = "public | eu-west-2a"
   }
 }
 
-resource "aws_subnet" "private_d" {
+resource "aws_subnet" "private_a" {
   vpc_id            = aws_vpc.app_vpc.id
   cidr_block        = "10.0.2.0/25"
-  availability_zone = "eu-west-2d"
+  availability_zone = "eu-west-2a"
 
   tags = {
-    "Name" = "private | eu-west-2d"
+    "Name" = "private | eu-west-2a"
   }
 }
 
-resource "aws_subnet" "public_e" {
+resource "aws_subnet" "public_b" {
   vpc_id            = aws_vpc.app_vpc.id
   cidr_block        = "10.0.1.128/25"
-  availability_zone = "eu-west-2e"
+  availability_zone = "eu-west-2b"
 
   tags = {
-    "Name" = "public | eu-west-2e"
+    "Name" = "public | eu-west-2b"
   }
 }
 
-resource "aws_subnet" "private_e" {
+resource "aws_subnet" "private_b" {
   vpc_id            = aws_vpc.app_vpc.id
   cidr_block        = "10.0.2.128/25"
-  availability_zone = "eu-west-2e"
+  availability_zone = "eu-west-2b"
 
   tags = {
-    "Name" = "private | eu-west-2e"
+    "Name" = "private | eu-west-2b"
   }
 }
 
