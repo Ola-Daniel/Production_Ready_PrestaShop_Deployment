@@ -6,40 +6,40 @@ resource "aws_vpc" "app_vpc" {
 resource "aws_subnet" "public_d" {
   vpc_id            = aws_vpc.app_vpc.id
   cidr_block        = "10.0.1.0/25"
-  availability_zone = "us-east-1d"
+  availability_zone = "eu-west-2d"
 
   tags = {
-    "Name" = "public | us-east-1d"
+    "Name" = "public | eu-west-2d"
   }
 }
 
 resource "aws_subnet" "private_d" {
   vpc_id            = aws_vpc.app_vpc.id
   cidr_block        = "10.0.2.0/25"
-  availability_zone = "us-east-1d"
+  availability_zone = "eu-west-2d"
 
   tags = {
-    "Name" = "private | us-east-1d"
+    "Name" = "private | eu-west-2d"
   }
 }
 
 resource "aws_subnet" "public_e" {
   vpc_id            = aws_vpc.app_vpc.id
   cidr_block        = "10.0.1.128/25"
-  availability_zone = "us-east-1e"
+  availability_zone = "eu-west-2e"
 
   tags = {
-    "Name" = "public | us-east-1e"
+    "Name" = "public | eu-west-2e"
   }
 }
 
 resource "aws_subnet" "private_e" {
   vpc_id            = aws_vpc.app_vpc.id
   cidr_block        = "10.0.2.128/25"
-  availability_zone = "us-east-1e"
+  availability_zone = "eu-west-2e"
 
   tags = {
-    "Name" = "private | us-east-1e"
+    "Name" = "private | eu-west-2e"
   }
 }
 

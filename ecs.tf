@@ -2,6 +2,7 @@
 resource "aws_ecs_cluster" "app" {
   name = "app"
 }
+
 resource "aws_ecs_service" "prestashop" {
   name            = "prestashop"
   task_definition = aws_ecs_task_definition.prestashop.arn
@@ -54,7 +55,7 @@ resource "aws_ecs_task_definition" "prestashop" {
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-region": "us-east-1",
+          "awslogs-region": "eu-west-2",
           "awslogs-group": "/ecs/prestashop",
           "awslogs-stream-prefix": "ecs"
         }
