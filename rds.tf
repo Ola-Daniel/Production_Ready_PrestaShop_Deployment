@@ -6,7 +6,7 @@ module "db" {
 
   engine            = "mysql"
   engine_version    = "5.7.25"
-  instance_class    = "db.t2.micro"
+  instance_class    = "db.t2.small"
   allocated_storage = 5
 
   db_name  = "prestashop"
@@ -14,6 +14,8 @@ module "db" {
   port     = "3306"
 
   iam_database_authentication_enabled = true
+
+  db_subnet_group_name    =  aws_db_subnet_group.mysql_subnet_group.name
 
   vpc_security_group_ids = [
     aws_security_group.ingress_database.id,
@@ -37,8 +39,8 @@ module "db" {
   # DB subnet group
   create_db_subnet_group = false
   subnet_ids             = [
-    aws_subnet.public_a.id,
-    aws_subnet.public_b.id,
+    aws_subnet.private_a.id,
+    aws_subnet.private_b.id,
   ]
 
   # DB parameter group
