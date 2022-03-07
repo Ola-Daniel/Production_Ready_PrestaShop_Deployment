@@ -170,12 +170,11 @@ resource "aws_security_group" "ingress_database" {
 }
 
 resource "aws_db_subnet_group" "mysql_subnet_group" {
-    name       = "mysqlsubgroup"
-    subnet_ids = ["${aws_subnet.private_a.id}",
-        "${aws_subnet.private_b.id}"
-        ]
-
-    tags = {
-        Name = "MySQL subnet group"
-    }
+  name = "mysqlsubgroup"
+  subnet_ids = ["${aws_subnet.private_a.id}",
+    "${aws_subnet.private_b.id}"
+  ]
+  tags = {
+    Name = "Mysql subnet group"
+  }
 }

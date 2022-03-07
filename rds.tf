@@ -1,6 +1,6 @@
 # rds.tf
 module "db" {
-  source  = "terraform-aws-modules/rds/aws"
+  source = "terraform-aws-modules/rds/aws"
 
   identifier = "prestashop"
 
@@ -16,7 +16,7 @@ module "db" {
 
   iam_database_authentication_enabled = true
 
-  db_subnet_group_name    =  aws_db_subnet_group.mysql_subnet_group.name
+  db_subnet_group_name = aws_db_subnet_group.mysql_subnet_group.name
 
   vpc_security_group_ids = [
     aws_security_group.ingress_database.id,
@@ -28,8 +28,8 @@ module "db" {
 
   # Enhanced Monitoring - see example for details on how to create the role
   # by yourself, in case you don't want to create it automatically
-  monitoring_interval = "30"
-  monitoring_role_name = "MyRDSMonitoringRole"
+  monitoring_interval    = "30"
+  monitoring_role_name   = "MyRDSMonitoringRole"
   create_monitoring_role = true
 
   tags = {
@@ -39,7 +39,7 @@ module "db" {
 
   # DB subnet group
   create_db_subnet_group = false
-  subnet_ids             = [
+  subnet_ids = [
     aws_subnet.private_a.id,
     aws_subnet.private_b.id,
   ]
@@ -55,11 +55,11 @@ module "db" {
 
   parameters = [
     {
-      name = "character_set_client"
+      name  = "character_set_client"
       value = "utf8mb4"
     },
     {
-      name = "character_set_server"
+      name  = "character_set_server"
       value = "utf8mb4"
     }
   ]
